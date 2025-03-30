@@ -8,7 +8,6 @@ app.use(cors());
 
 const API_KEY = "082dd83940556fbde29b2bbaef9db9a1";
 
-// Route to get current weather data
 app.get("/weather", async (req, res) => {
     const { city } = req.query;
     if (!city) {
@@ -26,7 +25,7 @@ app.get("/weather", async (req, res) => {
     }
 });
 
-// Route to get 5-day forecast
+
 app.get("/forecast", async (req, res) => {
     const { city } = req.query;
     if (!city) {
