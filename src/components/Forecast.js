@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ReactAnimatedWeather from "react-animated-weather";
 
-const API_URL = "https://weather-app-fwyv.onrender.com"; // Update with your actual Render backend URL
+const API_URL = "https://weather-app-fwyv.onrender.com";
 
 function Forecast({ weather }) {
   const { data } = weather;
@@ -11,7 +11,7 @@ function Forecast({ weather }) {
 
   useEffect(() => {
     const fetchForecastData = async () => {
-      if (!data.name) return; // Prevent API call if no city is selected
+      if (!data.name) return; 
 
       try {
         const response = await axios.get(`${API_URL}/forecast?city=${data.name}`);
