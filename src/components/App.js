@@ -5,7 +5,7 @@ import Forecast from "./Forecast";
 import "../styles.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-const API_URL = "https://weather-app-fwyv.onrender.com"; // Update with your Render backend URL
+const API_URL = "https://weather-app-fwyv.onrender.com"; 
 
 function App() {
   const [query, setQuery] = useState("");
