@@ -25,6 +25,7 @@ This is a web app developed as a personal project using React.js. It allows user
 - JavaScript
 - VS Code
 - OpenWeatherMap API
+- Render (for backend deployment)
 
 # Installation and Usage
 To use this app, follow these steps:
@@ -37,8 +38,8 @@ To use this app, follow these steps:
 - Open your browser and navigate to `http://localhost:3000` to use the app.
 
 ### Backend Setup
-- Run `node server.js` to start the backend server.
-- Ensure the backend is running before using the frontend.
+- The backend server is now deployed on Render, so there is no need to run node server.js manually.
+- Ensure the frontend is configured to make API requests to the deployed backend URL.
 
 ### How to Use
 - Type the name of the city you want to search for in the search bar and press Enter.
