@@ -32,7 +32,6 @@ To use this app, follow these steps:
 ### Frontend Setup
 - Clone the repository or download the source code.
 - Open the project in your preferred code editor.
-- Navigate to the frontend folder.
 - Run `npm install` to install the necessary dependencies.
 - Run `npm start` to start the development server.
 - Open your browser and navigate to `http://localhost:3000` to use the app.
