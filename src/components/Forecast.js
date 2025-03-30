@@ -9,7 +9,7 @@ function Forecast({ weather }) {
 
   useEffect(() => {
     const fetchForecastData = async () => {
-      if (!data.name) return; // Prevent API call if no city is selected
+      if (!data.name) return;
 
       try {
         const response = await axios.get(`http://localhost:5000/forecast?city=${data.name}`);
