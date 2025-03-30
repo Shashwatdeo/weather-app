@@ -1,12 +1,12 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
-require("dotenv").config(); // Load environment variables
+require("dotenv").config(); 
 
 const app = express();
 app.use(cors());
 
-const API_KEY = process.env.API_KEY; // Use API key from .env
+const API_KEY = process.env.API_KEY; 
 
 // Route to get current weather data
 app.get("/weather", async (req, res) => {
