@@ -5,6 +5,8 @@ import Forecast from "./Forecast";
 import "../styles.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
+const API_URL = "https://weather-app-fwyv.onrender.com"; // Update with your Render backend URL
+
 function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({
@@ -38,7 +40,7 @@ function App() {
   const search = async (city) => {
     setWeather({ ...weather, loading: true });
 
-    const url = `http://localhost:5000/weather?city=${city}`;
+    const url = `${API_URL}/weather?city=${city}`;
 
     try {
       const res = await axios.get(url);
