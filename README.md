@@ -48,8 +48,7 @@ To use this app, follow these steps:
 - View past search history and 5-day forecast.
 
 # Demo
-A live demo of the React Weather App is available at [LINK TO LIVE DEMO](https://react-weather-app-shemmee.netlify.app).
-
+A live demo of the React Weather App is available at [Live Demo](https://weather-app-shash.vercel.app/).
 # Credits
 - The weather app was created by [Shashwat Deo](https://github.com/Shashwatdeo) as a personal project.
 - The app uses the OpenWeatherMap API to retrieve weather data.
