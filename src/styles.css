@@ -573,3 +573,39 @@ body {
   transform: translateY(-3px);
   box-shadow: 0 5px 15px var(--shadow-color);
 }
+
+/* Responsive Design */
+
+@media screen and (max-width: 600px) { /* Mobile View */
+  .container {
+      width: 90%;
+      max-width: 300px;
+  }
+  .weather-info {
+      font-size: 16px;
+  }
+  input, button {
+      font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) { /* Tablet View */
+  .container {
+      max-width: 500px;
+  }
+  .weather-info {
+      font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1025px) { /* Desktop View */
+  .container {
+      max-width: 600px;
+  }
+  .weather-info {
+      font-size: 22px;
+  }
+  input, button {
+      font-size: 18px;
+  }
+}
