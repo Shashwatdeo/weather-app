@@ -38,24 +38,50 @@ function App() {
   };
 
   const search = async (city) => {
-    setWeather({ ...weather, loading: true });
+  const cachedData = JSON.parse(localStorage.getItem(`weather_${city}`));
+  
+  if (cachedData && Date.now() - cachedData.timestamp < 10 * 60 * 1000) {
+    // **Use cached data if it's less than 10 minutes old**
+    setWeather({ data: cachedData.data, loading: false, error: false });
+    return;
+  }
 
-    const url = `${API_URL}/weather?city=${city}`;
+  // **Fetch new data if cache is old or unavailable**
+  setWeather((prev) => ({ ...prev, loading: true, error: false }));
 
-    try {
-      const res = await axios.get(url);
-      setWeather({ data: res.data, loading: false, error: false });
+  const url = `${API_URL}/weather?city=${city}`;
 
-      let updatedHistory = [city, ...searchHistory.filter(item => item !== city)];
-      if (updatedHistory.length > 5) updatedHistory.pop();
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
 
-      setSearchHistory(updatedHistory);
-      localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
-    } catch (error) {
-      console.error("Error fetching weather data:", error);
-      setWeather({ data: {}, loading: false, error: true });
+    const res = await axios.get(url, { signal: controller.signal, timeout: 3000 });
+
+    clearTimeout(timeoutId);
+
+    setWeather({ data: res.data, loading: false, error: false });
+
+    // **Save response to local storage for faster future searches**
+    localStorage.setItem(`weather_${city}`, JSON.stringify({ data: res.data, timestamp: Date.now() }));
+
+    let updatedHistory = [city, ...searchHistory.filter((item) => item !== city)];
+    if (updatedHistory.length > 5) updatedHistory.pop();
+
+    setSearchHistory(updatedHistory);
+    localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+    let errorMessage = "Failed to load weather data.";
+    if (error.code === "ECONNABORTED" || error.message.includes("aborted")) {
+      errorMessage = "Request timed out. Try again.";
+    } else if (error.response?.status === 404) {
+      errorMessage = "City not found. Try another.";
     }
-  };
+    setWeather({ data: {}, loading: false, error: errorMessage });
+  }
+};
+
+
 
   useEffect(() => {
     search("Phagwara");
