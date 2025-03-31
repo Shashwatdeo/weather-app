@@ -41,12 +41,10 @@ function App() {
   const cachedData = JSON.parse(localStorage.getItem(`weather_${city}`));
   
   if (cachedData && Date.now() - cachedData.timestamp < 10 * 60 * 1000) {
-    // **Use cached data if it's less than 10 minutes old**
     setWeather({ data: cachedData.data, loading: false, error: false });
     return;
   }
 
-  // **Fetch new data if cache is old or unavailable**
   setWeather((prev) => ({ ...prev, loading: true, error: false }));
 
   const url = `${API_URL}/weather?city=${city}`;
@@ -61,7 +59,6 @@ function App() {
 
     setWeather({ data: res.data, loading: false, error: false });
 
-    // **Save response to local storage for faster future searches**
     localStorage.setItem(`weather_${city}`, JSON.stringify({ data: res.data, timestamp: Date.now() }));
 
     let updatedHistory = [city, ...searchHistory.filter((item) => item !== city)];
@@ -80,8 +77,6 @@ function App() {
     setWeather({ data: {}, loading: false, error: errorMessage });
   }
 };
-
-
 
   useEffect(() => {
     search("Phagwara");
