@@ -16,6 +16,7 @@
     "csbbust": "1.0.1",
     "express": "^4.21.2",
     "loader-utils": "3.2.1",
+    "lodash": "^4.17.21",
     "react": "18.2.0",
     "react-animated-icons": "^1.0.0",
     "react-animated-weather": "^4.0.1",
