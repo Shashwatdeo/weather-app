@@ -38,39 +38,22 @@ function App() {
   };
 
   const search = async (city) => {
-    setWeather((prev) => ({ ...prev, loading: true, error: false }));
-  
+    setWeather({ ...weather, loading: true });
+
     const url = `${API_URL}/weather?city=${city}`;
-  
+
     try {
-      const controller = new AbortController(); 
-      const timeoutId = setTimeout(() => controller.abort(), 1000); 
-  
-      const res = await axios.get(url, {
-        signal: controller.signal, 
-        timeout: 1000,
-      });
-  
-      clearTimeout(timeoutId); 
-  
+      const res = await axios.get(url);
       setWeather({ data: res.data, loading: false, error: false });
-  
-      let updatedHistory = [city, ...searchHistory.filter((item) => item !== city)];
+
+      let updatedHistory = [city, ...searchHistory.filter(item => item !== city)];
       if (updatedHistory.length > 5) updatedHistory.pop();
-  
+
       setSearchHistory(updatedHistory);
       localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
     } catch (error) {
       console.error("Error fetching weather data:", error);
-  
-      let errorMessage = "Failed to load weather data.";
-      if (error.code === "ECONNABORTED" || error.message.includes("aborted")) {
-        errorMessage = "Request timed out. Try again.";
-      } else if (error.response?.status === 404) {
-        errorMessage = "City not found. Try another.";
-      }
-  
-      setWeather({ data: {}, loading: false, error: errorMessage });
+      setWeather({ data: {}, loading: false, error: true });
     }
   };
   
