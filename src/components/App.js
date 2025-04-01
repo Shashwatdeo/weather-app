@@ -19,18 +19,15 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 
-  // Dark mode effect
   useEffect(() => {
     document.body.style.background = darkMode ? "#1f1c2c" : "#f4f4f4";
   }, [darkMode]);
 
-  // Load search history from localStorage
   useEffect(() => {
     const storedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
     setSearchHistory(storedHistory);
   }, []);
-
-  // Date formatting helper
+  
   const toDate = () => {
     const months = [
       "January", "February", "March", "April", "May", "June", "July",
@@ -42,7 +39,6 @@ function App() {
     return `${days[currentDate.getDay()]} ${currentDate.getDate()} ${months[currentDate.getMonth()]}`;
   };
 
-  // Debounced search function
   const debouncedSearch = useCallback(
     debounce(async (city) => {
       if (!city.trim()) return;
@@ -62,7 +58,6 @@ function App() {
 
         setWeather({ data: res.data, loading: false, error: false });
 
-        // Update search history
         const updatedHistory = [city, ...searchHistory.filter(item => item !== city)].slice(0, 5);
         setSearchHistory(updatedHistory);
         localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
@@ -87,14 +82,12 @@ function App() {
     [searchHistory]
   );
 
-  // Handle manual search
   const handleSearch = (city) => {
     if (city.trim()) {
       debouncedSearch(city);
     }
   };
 
-  // Initial load
   useEffect(() => {
     const defaultCity = searchHistory[0] || "Phagwara";
     debouncedSearch(defaultCity);
